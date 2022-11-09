@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Pages from './Pages';
 import { useState, useEffect } from "react";
 import { Grid, Switch } from "@mui/material";
