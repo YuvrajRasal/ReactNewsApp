@@ -11,7 +11,7 @@ import {
 
 const Contact = ({ selectedNews }) => {
     return (
-        <Card sx={{ maxWidth: 345 }} key={selectedNews.publishedAt} >
+        <Card sx={{ maxWidth: 345 }} key={selectedNews.publishedAt}>
             <CardMedia
                 component="img"
                 height="140"

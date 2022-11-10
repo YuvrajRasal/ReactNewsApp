@@ -8,7 +8,7 @@ const About = ({setSelectedNews}) =>{
   //getting posts
   useEffect(() => {
     const paginationFunc = async () => {
-      const res = await fetch("https://newsapi.org/v2/everything?domains=wsj.com&apiKey=8b1415110de2471d92d95f97d5c63760");
+      const res = await fetch("https://saurav.tech/NewsAPI/top-headlines/category/health/in.json");
       const data = await res.json();
       setData(data.articles);
       console.log(data.articles);
