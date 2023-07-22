@@ -9,8 +9,20 @@ import {
     CardContent,
     Button,
     Typography,
+    Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+// import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+
+    //   margin: 16,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+    //   border:"2px solid blue"
+
+  };
 
 const Pages = ({ data, setSelectedNews }) => {
     const [
@@ -19,56 +31,79 @@ const Pages = ({ data, setSelectedNews }) => {
         endPageIndex,
         currentPageIndex, //eslint-disable-line
         displayPage,
-    ] = usePagination(5, data.length);
+    ] = usePagination(9, data.length);
 
     const navigate = useNavigate();
     return (
-        // <Grid item xs={6} key={"publishedAt"}>
-        <div style={{ marginLeft: "20px" }}>
-            <h1>User Posts</h1>
+        <>
+        <div >
+        <Typography 
+        sx={{
+            display:"flex",
+            justifyContent:"center",
+            fontSize:"40px"
+            }}
+        >User Posts</Typography>
+
+        <Grid container spacing={2.5} sx={{pr:"20px" , pl:"20px"}}>
             {(() => {
                 const displayPosts = [];
                 for (let i = startPageIndex; i <= endPageIndex; i++) {
                     displayPosts.push(
-                        //   <Grid item xs={3} key={key}>
-                        <Card sx={{ maxWidth: 345 }} key={data[i].publishedAt}>
+                        <Grid item xs={12} sm={6} md={4} lg={4} sx={{display:"flex"}}>
+                        <Card sx={{ maxWidth: 445 }} key={data[i].publishedAt} style={styles}>
+                            
+                            <CardContent >
                             <CardMedia
                                 component="img"
-                                height="140"
+                                height="180"
                                 image={data[i].urlToImage}
                                 alt="green iguana"
+                                sx={{mb:3}}
                             />
-                            <CardContent>
                                 <Typography
                                     gutterBottom
-                                    variant="h5"
+                                    // variant="h5"
                                     component="div"
+                                    sx={{
+                                        fontSize:"23px",
+                                        fontWeight:500,
+                                        fontFamily:"poppins"
+                                    }}
                                 >
-                                    {data[i].author}
+                                    {data[i].title}
                                 </Typography>
                                 <Typography
                                     gutterBottom
-                                    variant="h7"
+                                    // variant="h7"
                                     component="div"
+                                    sx={{
+                                        fontSize:"18px",
+                                        fontWeight:400,
+                                        fontFamily:"poppins"
+                                    }}
                                 >
                                     {data[i].title}
                                 </Typography>
 
                                 <Typography
-                                    variant="body2"
+                                    variant="body1"
                                     color="text.secondary"
                                 >
                                     {
-                                        data[i].description.length < 40
-                                            ? `${data[i].description}`
-                                            : `${data[i].description.substring(
-                                                  0,
-                                                  80
-                                              )}...` //why did we need 80 (suvh a large no.)
+                                       data[i]?.description?.length < 40
+                                       ? `${data[i]?.description ?? 'No description'}`
+                                       : `${(data[i]?.description ?? 'No description').substring(0, 80)}...`
+                                      //why did we need 80 (suvh a large no.)
+                                              
                                     }
                                 </Typography>
                             </CardContent>
-                            <CardActions>
+                            <CardActions
+                            sx={{
+                                display:"flex",
+                                justifyContent:"space-between"
+                                }}>
                                 <Button
                                     size="small"
                                     onClick={() => {
@@ -83,17 +118,24 @@ const Pages = ({ data, setSelectedNews }) => {
                                 <a href={data[i].url}> Learn More</a>
                             </CardActions>
                         </Card>
+                        </Grid>
                     );
                 }
                 return displayPosts;
             })()}
-            <Pagination
+        </Grid>
+        <Pagination
                 color="primary"
                 count={totalPages}
                 onChange={(event, value) => displayPage(value)}
+                sx={{
+                    display:"flex",
+                    justifyContent:"center",
+                    margin:"40px 0px"
+                    }}
             />
         </div>
-        // </Grid>
+        </>
     );
 };
 

@@ -18,7 +18,7 @@ const About = ({setSelectedNews}) =>{
     return(
         <>
         {data && data.length > 0 ? 
-      <Grid container xs={6}>
+      <Grid container xs={12}>
     <Pages data={data} setSelectedNews={setSelectedNews}/>
      </Grid>
     : <p>Loading...</p>}
